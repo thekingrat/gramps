@@ -17,6 +17,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
+# $Id$
+#
 #
 from collections import defaultdict
 from gramps.gen.const import GRAMPS_LOCALE as glocale
@@ -73,8 +75,9 @@ class GivenNameCloudGramplet(Gramplet):
                     representative_handle[first_two] = person.handle
                     givenname = ' '.join(anyNBSP[1].split()[1:])
                 for givensubname in givenname.split():
-                    givensubnames[givensubname] += 1
-                    representative_handle[givensubname] = person.handle
+                    if len(givensubname) > 2:
+                        givensubnames[givensubname] += 1
+                        representative_handle[givensubname] = person.handle
             cnt += 1
             if not cnt % _YIELD_INTERVAL:
                 yield True
