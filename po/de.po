@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-26 09:20+0100\n"
-"PO-Revision-Date: 2014-10-26 19:15+0100\n"
+"POT-Creation-Date: 2014-10-31 14:03+0100\n"
+"PO-Revision-Date: 2014-10-31 14:06+0100\n"
 "Last-Translator: Mirko Leonhäuser <mirko@leonhaeuser.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -2497,7 +2497,7 @@ msgstr "Freitag"
 msgid "Saturday"
 msgstr "Samstag"
 
-#: ../gramps/gen/db/base.py:1643
+#: ../gramps/gen/db/base.py:1643 ../gramps/gui/widgets/fanchart.py:1851
 msgid "Add child to family"
 msgstr "Füge ein Kind zur Familie hinzu."
 
@@ -2750,7 +2750,7 @@ msgstr ""
 "\">eine Sicherung</a> von deinem Stammbaum erstellen."
 
 #: ../gramps/gen/db/undoredo.py:256 ../gramps/gen/db/undoredo.py:293
-#: ../gramps/gen/db/write.py:2315
+#: ../gramps/gen/db/write.py:2318
 #, python-format
 msgid "_Undo %s"
 msgstr "_Rückgängig %s"
@@ -2795,11 +2795,11 @@ msgstr "%6d  Aufbewahrungsorte aktualisiert mit %6d Fundstellen in %6d sek.\n"
 msgid "%6d  Sources       upgraded with %6d citations in %6d secs\n"
 msgstr "%6d  Quellen          aktualisiert mit %6d Fundstellen in %6d sek.\n"
 
-#: ../gramps/gen/db/upgrade.py:743
+#: ../gramps/gen/db/upgrade.py:745
 msgid "Number of new objects upgraded:\n"
 msgstr "Anzahl von neuen, aktualisierten Objekten:\n"
 
-#: ../gramps/gen/db/upgrade.py:749
+#: ../gramps/gen/db/upgrade.py:751
 msgid ""
 "\n"
 "\n"
@@ -2815,7 +2815,7 @@ msgstr ""
 "um Fundstellen zusammenzufassen, die identische\n"
 "Informationen enthalten."
 
-#: ../gramps/gen/db/upgrade.py:753
+#: ../gramps/gen/db/upgrade.py:755
 msgid "Upgrade Statistics"
 msgstr "Aktualisiere Statistiken"
 
@@ -2832,11 +2832,11 @@ msgstr ""
 
 #. Make a tuple of the functions and classes that we need for
 #. each of the primary object tables.
-#: ../gramps/gen/db/write.py:1363
+#: ../gramps/gen/db/write.py:1366
 msgid "Rebuild reference map"
 msgstr "Interne Referenzen neu erstellen"
 
-#: ../gramps/gen/db/write.py:2168
+#: ../gramps/gen/db/write.py:2171
 #, python-format
 msgid ""
 "A second transaction is started while there is still a transaction, \"%s\", "
@@ -7164,17 +7164,17 @@ msgid "Video"
 msgstr "Video"
 
 #: ../gramps/gen/lib/styledtexttagtype.py:64
-#: ../gramps/gui/widgets/styledtexteditor.py:473
+#: ../gramps/gui/widgets/styledtexteditor.py:477
 msgid "Bold"
 msgstr "Fett"
 
 #: ../gramps/gen/lib/styledtexttagtype.py:65
-#: ../gramps/gui/widgets/styledtexteditor.py:471
+#: ../gramps/gui/widgets/styledtexteditor.py:475
 msgid "Italic"
 msgstr "Kursiv"
 
 #: ../gramps/gen/lib/styledtexttagtype.py:66
-#: ../gramps/gui/widgets/styledtexteditor.py:475
+#: ../gramps/gui/widgets/styledtexteditor.py:479
 msgid "Underline"
 msgstr "Unterstrichen"
 
@@ -7202,7 +7202,7 @@ msgstr "Hochgestellt"
 #: ../gramps/gui/glade/editlink.glade:169
 #: ../gramps/gui/widgets/styledtextbuffer.py:566
 #: ../gramps/gui/widgets/styledtextbuffer.py:603
-#: ../gramps/gui/widgets/styledtexteditor.py:487
+#: ../gramps/gui/widgets/styledtexteditor.py:491
 msgid "Link"
 msgstr "Verknüpfung"
 
@@ -7586,7 +7586,7 @@ msgstr "GraphViz Layout"
 
 #. ###############################
 #: ../gramps/gen/plug/docgen/graphdoc.py:138
-#: ../gramps/gui/widgets/styledtexteditor.py:496
+#: ../gramps/gui/widgets/styledtexteditor.py:500
 msgid "Font family"
 msgstr "Schriftfamilie"
 
@@ -7600,7 +7600,7 @@ msgstr ""
 "http://www.nongnu.org/freefont/"
 
 #: ../gramps/gen/plug/docgen/graphdoc.py:147
-#: ../gramps/gui/widgets/styledtexteditor.py:508
+#: ../gramps/gui/widgets/styledtexteditor.py:512
 msgid "Font size"
 msgstr "Schriftgröße"
 
@@ -10064,7 +10064,7 @@ msgstr "Automatisch erkannt"
 msgid "Select file _type:"
 msgstr "Datei_typ auswählen:"
 
-#: ../gramps/gui/dbman.py:110 ../gramps/gui/glade/dbman.glade:386
+#: ../gramps/gui/dbman.py:110 ../gramps/gui/glade/dbman.glade:471
 msgid "_Archive"
 msgstr "_Archiv"
 
@@ -10620,6 +10620,7 @@ msgstr "Referenz bearbeiten"
 msgid "%(part1)s - %(part2)s"
 msgstr "%(part1)s - %(part2)s"
 
+#. we now construct an add menu
 #: ../gramps/gui/editors/displaytabs/buttontab.py:70
 #: ../gramps/gui/glade/editfamily.glade:216
 #: ../gramps/gui/glade/editfamily.glade:226
@@ -10630,6 +10631,7 @@ msgstr "%(part1)s - %(part2)s"
 #: ../gramps/gui/glade/rule.glade:452
 #: ../gramps/gui/glade/styleeditor.glade:1373
 #: ../gramps/gui/glade/styleeditor.glade:1380
+#: ../gramps/gui/widgets/fanchart.py:1844
 #: ../gramps/plugins/view/relview.py:419
 msgid "Add"
 msgstr "Hinzufügen"
@@ -12806,23 +12808,23 @@ msgstr "Zuvor erstelltes Buch öffnen"
 msgid "Manage previously created books"
 msgstr "Zuvor erstellte Bücher verwalten"
 
-#: ../gramps/gui/glade/book.glade:438
+#: ../gramps/gui/glade/book.glade:435
 msgid "Add an item to the book"
 msgstr "Etwas zum Buch hinzufügen"
 
-#: ../gramps/gui/glade/book.glade:461
+#: ../gramps/gui/glade/book.glade:458
 msgid "Remove currently selected item from the book"
 msgstr "Den gewählten Artikel aus dem Buch entfernen"
 
-#: ../gramps/gui/glade/book.glade:483
+#: ../gramps/gui/glade/book.glade:480
 msgid "Move current selection one step up in the book"
 msgstr "Die aktuelle Auswahl im Buch einen Schritt nach oben schieben"
 
-#: ../gramps/gui/glade/book.glade:505
+#: ../gramps/gui/glade/book.glade:502
 msgid "Move current selection one step down in the book"
 msgstr "Die aktuelle Auswahl im Buch einen Schritt nach unten schieben"
 
-#: ../gramps/gui/glade/book.glade:527
+#: ../gramps/gui/glade/book.glade:524
 msgid "Configure currently selected item"
 msgstr "Den gewählten Artikel konfigurieren"
 
@@ -12878,19 +12880,32 @@ msgstr "Versionsbeschreibung"
 msgid "Family Trees - Gramps"
 msgstr "Stammbäume - Gramps"
 
-#: ../gramps/gui/glade/dbman.glade:154
+#: ../gramps/gui/glade/dbman.glade:149
 msgid "_Close Window"
 msgstr "Fenster s_chließen"
 
-#: ../gramps/gui/glade/dbman.glade:208
+#: ../gramps/gui/glade/dbman.glade:197
 msgid "_Load Family Tree"
 msgstr "Stammbaum _laden"
 
-#: ../gramps/gui/glade/dbman.glade:354
+#: ../gramps/gui/glade/dbman.glade:327 ../gramps/gui/glade/editlink.glade:227
+msgid "New"
+msgstr "Neu"
+
+#: ../gramps/gui/glade/dbman.glade:372
+msgid "_Copy"
+msgstr "_Kopieren"
+
+#: ../gramps/gui/glade/dbman.glade:419
+#: ../gramps/gui/glade/grampletpane.glade:132
+msgid "Delete"
+msgstr "Löschen"
+
+#: ../gramps/gui/glade/dbman.glade:439
 msgid "_Rename"
 msgstr "_Umbenennen"
 
-#: ../gramps/gui/glade/dbman.glade:370
+#: ../gramps/gui/glade/dbman.glade:455
 msgid "Re_pair"
 msgstr "Re_parieren"
 
@@ -13504,10 +13519,6 @@ msgstr "Internetadresse:"
 #: ../gramps/gui/glade/editlink.glade:132
 msgid "_Link Type:"
 msgstr "_Linkart:"
-
-#: ../gramps/gui/glade/editlink.glade:227
-msgid "New"
-msgstr "Neu"
 
 #: ../gramps/gui/glade/editlocation.glade:111
 msgid "The town or city where the place is."
@@ -14198,10 +14209,6 @@ msgstr "Klicken zum Ein-/Ausklappen"
 #: ../gramps/gui/glade/grampletpane.glade:128
 msgid "Click to delete gramplet from view"
 msgstr "Klicken, um das Gramplet aus der Ansicht zu löschen."
-
-#: ../gramps/gui/glade/grampletpane.glade:132
-msgid "Delete"
-msgstr "Löschen"
 
 #: ../gramps/gui/glade/grampletpane.glade:142
 msgid "Close"
@@ -14990,7 +14997,7 @@ msgid "Font"
 msgstr "Schrift"
 
 #: ../gramps/gui/grampsgui.py:158
-#: ../gramps/gui/widgets/styledtexteditor.py:483
+#: ../gramps/gui/widgets/styledtexteditor.py:487
 msgid "Font Color"
 msgstr "Schriftfarbe"
 
@@ -15061,6 +15068,7 @@ msgstr "Notizen"
 #. Go over parents and build their menu
 #. don't show rest
 #: ../gramps/gui/grampsgui.py:172 ../gramps/gui/merge/mergeperson.py:215
+#: ../gramps/gui/widgets/fanchart.py:1767
 #: ../gramps/plugins/quickview/all_relations.py:305
 #: ../gramps/plugins/tool/notrelated.py:126
 #: ../gramps/plugins/view/pedigreeview.py:1780
@@ -15555,6 +15563,7 @@ msgstr "Keine Eltern gefunden"
 
 #. Go over spouses and build their menu
 #: ../gramps/gui/merge/mergeperson.py:226
+#: ../gramps/gui/widgets/fanchart.py:1653
 #: ../gramps/plugins/textreport/kinshipreport.py:123
 #: ../gramps/plugins/view/pedigreeview.py:1660
 msgid "Spouses"
@@ -17423,6 +17432,61 @@ msgstr "Diesen Abschnitt ausklappen"
 msgid "Collapse this section"
 msgstr "Diesen Abschnitt einklappen"
 
+#: ../gramps/gui/widgets/fanchart.py:1597
+#: ../gramps/plugins/view/pedigreeview.py:1604
+#: ../gramps/plugins/view/pedigreeview.py:1630
+msgid "People Menu"
+msgstr "Personenmenü"
+
+#: ../gramps/gui/widgets/fanchart.py:1620
+#: ../gramps/plugins/view/relview.py:826
+msgid "Edit family"
+msgstr "Familie bearbeiten"
+
+#: ../gramps/gui/widgets/fanchart.py:1637
+#: ../gramps/plugins/view/relview.py:827
+msgid "Reorder families"
+msgstr "Familien wieder ordnen"
+
+#. Go over siblings and build their menu
+#: ../gramps/gui/widgets/fanchart.py:1687
+#: ../gramps/plugins/quickview/quickview.gpr.py:314
+#: ../gramps/plugins/view/pedigreeview.py:1695
+#: ../gramps/plugins/view/relview.py:924
+msgid "Siblings"
+msgstr "Geschwister"
+
+#. Go over children and build their menu
+#: ../gramps/gui/widgets/fanchart.py:1730
+#: ../gramps/plugins/gramplet/gramplet.gpr.py:794
+#: ../gramps/plugins/gramplet/gramplet.gpr.py:808
+#: ../gramps/plugins/textreport/familygroup.py:591
+#: ../gramps/plugins/textreport/indivcomplete.py:406
+#: ../gramps/plugins/view/pedigreeview.py:1740
+#: ../gramps/plugins/view/relview.py:1390
+#: ../gramps/plugins/webreport/narrativeweb.py:744
+msgid "Children"
+msgstr "Kinder"
+
+#. Go over parents and build their menu
+#: ../gramps/gui/widgets/fanchart.py:1809
+#: ../gramps/plugins/view/pedigreeview.py:1828
+msgid "Related"
+msgstr "Verknüpft"
+
+#: ../gramps/gui/widgets/fanchart.py:1860
+msgid "Add partner to person"
+msgstr "Partner zu einer Person hinzufügen"
+
+#: ../gramps/gui/widgets/fanchart.py:1868
+msgid "Add a person"
+msgstr "Eine Person hinzufügen"
+
+#: ../gramps/gui/widgets/fanchart.py:1943
+#: ../gramps/plugins/view/relview.py:1537
+msgid "Add Child to Family"
+msgstr "Kind zur Familie hinzufügen"
+
 #: ../gramps/gui/widgets/grampletbar.py:191
 #: ../gramps/gui/widgets/grampletpane.py:1169
 msgid "Unnamed Gramplet"
@@ -17546,56 +17610,56 @@ msgid "Reorder Relationships: %s"
 msgstr "Beziehungen neu ordnen: %s"
 
 #. spell checker submenu
-#: ../gramps/gui/widgets/styledtexteditor.py:388
+#: ../gramps/gui/widgets/styledtexteditor.py:392
 msgid "Spellcheck"
 msgstr "Rechtschreibprüfung"
 
-#: ../gramps/gui/widgets/styledtexteditor.py:393
+#: ../gramps/gui/widgets/styledtexteditor.py:397
 msgid "Search selection on web"
 msgstr "Suche Auswahl im Web"
 
-#: ../gramps/gui/widgets/styledtexteditor.py:404
+#: ../gramps/gui/widgets/styledtexteditor.py:408
 msgid "_Send Mail To..."
 msgstr "E-Mail _senden an..."
 
-#: ../gramps/gui/widgets/styledtexteditor.py:405
+#: ../gramps/gui/widgets/styledtexteditor.py:409
 msgid "Copy _E-mail Address"
 msgstr "_E-Mail-Adresse kopieren"
 
-#: ../gramps/gui/widgets/styledtexteditor.py:407
+#: ../gramps/gui/widgets/styledtexteditor.py:411
 msgid "_Open Link"
 msgstr "Link _öffnen"
 
-#: ../gramps/gui/widgets/styledtexteditor.py:408
+#: ../gramps/gui/widgets/styledtexteditor.py:412
 msgid "Copy _Link Address"
 msgstr "_Linkadresse kopieren"
 
-#: ../gramps/gui/widgets/styledtexteditor.py:411
+#: ../gramps/gui/widgets/styledtexteditor.py:415
 msgid "_Edit Link"
 msgstr "Verknüpfung _bearbeiten"
 
-#: ../gramps/gui/widgets/styledtexteditor.py:485
+#: ../gramps/gui/widgets/styledtexteditor.py:489
 msgid "Background Color"
 msgstr "Hintergrundfarbe"
 
-#: ../gramps/gui/widgets/styledtexteditor.py:489
+#: ../gramps/gui/widgets/styledtexteditor.py:493
 msgid "Clear Markup"
 msgstr "Markierungen löschen"
 
-#: ../gramps/gui/widgets/styledtexteditor.py:529
-#: ../gramps/gui/widgets/styledtexteditor.py:530
+#: ../gramps/gui/widgets/styledtexteditor.py:533
+#: ../gramps/gui/widgets/styledtexteditor.py:534
 msgid "Undo"
 msgstr "Rückgängig"
 
-#: ../gramps/gui/widgets/styledtexteditor.py:533
+#: ../gramps/gui/widgets/styledtexteditor.py:537
 msgid "Redo"
 msgstr "Wiederherstellen"
 
-#: ../gramps/gui/widgets/styledtexteditor.py:656
+#: ../gramps/gui/widgets/styledtexteditor.py:660
 msgid "Select font color"
 msgstr "Wähle Schriftfarbe"
 
-#: ../gramps/gui/widgets/styledtexteditor.py:658
+#: ../gramps/gui/widgets/styledtexteditor.py:662
 msgid "Select background color"
 msgstr "Wähle Hintergrundfarbe"
 
@@ -20348,17 +20412,6 @@ msgstr "Person Kinder"
 #: ../gramps/plugins/gramplet/gramplet.gpr.py:787
 msgid "Gramplet showing the children of a person"
 msgstr "Gramplet zeigt die Kinder einer Person"
-
-#. Go over children and build their menu
-#: ../gramps/plugins/gramplet/gramplet.gpr.py:794
-#: ../gramps/plugins/gramplet/gramplet.gpr.py:808
-#: ../gramps/plugins/textreport/familygroup.py:591
-#: ../gramps/plugins/textreport/indivcomplete.py:406
-#: ../gramps/plugins/view/pedigreeview.py:1740
-#: ../gramps/plugins/view/relview.py:1390
-#: ../gramps/plugins/webreport/narrativeweb.py:744
-msgid "Children"
-msgstr "Kinder"
 
 #: ../gramps/plugins/gramplet/gramplet.gpr.py:800
 msgid "Family Children"
@@ -27665,13 +27718,6 @@ msgstr "Zeige Personen mit demselben Vornamen wie eine Person."
 msgid "Same Given Names - stand-alone"
 msgstr "Derselbe Vornamen - alleinstehend"
 
-#. Go over siblings and build their menu
-#: ../gramps/plugins/quickview/quickview.gpr.py:314
-#: ../gramps/plugins/view/pedigreeview.py:1695
-#: ../gramps/plugins/view/relview.py:924
-msgid "Siblings"
-msgstr "Geschwister"
-
 #: ../gramps/plugins/quickview/quickview.gpr.py:315
 msgid "Display a person's siblings."
 msgstr "Zeigt Geschwister einer Person."
@@ -29958,11 +30004,11 @@ msgstr "Geschlechtsstatistik Werkzeug"
 msgid "Guess"
 msgstr "schätzen"
 
-#: ../gramps/plugins/tool/eventcmp.glade:239
+#: ../gramps/plugins/tool/eventcmp.glade:233
 msgid "_Filter:"
 msgstr "_Filter:"
 
-#: ../gramps/plugins/tool/eventcmp.glade:254
+#: ../gramps/plugins/tool/eventcmp.glade:248
 msgid ""
 "The event comparison utility uses the filters defined in the Custom Filter "
 "Editor."
@@ -29970,7 +30016,7 @@ msgstr ""
 "Das Werkzeug zum Vergleichen von Ereignissen verwendet die Filter, die im "
 "Filtereditor definiert sind."
 
-#: ../gramps/plugins/tool/eventcmp.glade:268
+#: ../gramps/plugins/tool/eventcmp.glade:262
 msgid "Custom filter _editor"
 msgstr "Benutzerf_iltereditor"
 
@@ -30417,7 +30463,7 @@ msgid_plural "{number_of} citations merged"
 msgstr[0] "{number_of} Fundstelle zusammengefasst"
 msgstr[1] "{number_of} Fundstellen zusammengefasst"
 
-#: ../gramps/plugins/tool/notrelated.glade:172
+#: ../gramps/plugins/tool/notrelated.glade:170
 msgid "_Tag"
 msgstr "Marke"
 
@@ -32211,20 +32257,10 @@ msgstr "Oben <-> Unten"
 msgid "Left <-> Right"
 msgstr "Links <-> Rechts"
 
-#: ../gramps/plugins/view/pedigreeview.py:1604
-#: ../gramps/plugins/view/pedigreeview.py:1630
-msgid "People Menu"
-msgstr "Personenmenü"
-
 #: ../gramps/plugins/view/pedigreeview.py:1817
 #: ../gramps/plugins/view/relview.py:421
 msgid "Add New Parents..."
 msgstr "Neue Eltern hinzufügen..."
-
-#. Go over parents and build their menu
-#: ../gramps/plugins/view/pedigreeview.py:1828
-msgid "Related"
-msgstr "Verknüpft"
 
 #: ../gramps/plugins/view/pedigreeview.py:1877
 msgid "Family Menu"
@@ -32350,14 +32386,6 @@ msgstr "Eltern neu ordnen"
 msgid "Remove person as child of these parents"
 msgstr "Entferne Person als Kind dieser Eltern"
 
-#: ../gramps/plugins/view/relview.py:826
-msgid "Edit family"
-msgstr "Familie bearbeiten"
-
-#: ../gramps/plugins/view/relview.py:827
-msgid "Reorder families"
-msgstr "Familien wieder ordnen"
-
 #: ../gramps/plugins/view/relview.py:828
 msgid "Remove person as parent in this family"
 msgstr "Entferne Person als Elternteil dieser Familie."
@@ -32448,10 +32476,6 @@ msgstr[1] "({number_of} Kinder)"
 #: ../gramps/plugins/view/relview.py:1410
 msgid " (no children)"
 msgstr " (keine Kinder)"
-
-#: ../gramps/plugins/view/relview.py:1537
-msgid "Add Child to Family"
-msgstr "Kind zur Familie hinzufügen"
 
 #: ../gramps/plugins/view/relview.py:1674
 msgid "Use shading"
@@ -34808,12 +34832,6 @@ msgstr "Kein Stylesheet"
 
 #~ msgid "<no name>"
 #~ msgstr "<kein Name>"
-
-#~ msgid "Add partner to person"
-#~ msgstr "Partner zu einer Person hinzufügen"
-
-#~ msgid "Add a person"
-#~ msgstr "Eine Person hinzufügen"
 
 #~ msgid "No Active Person selected."
 #~ msgstr "Keine aktive Person ausgewählt."
