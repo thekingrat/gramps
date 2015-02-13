@@ -56,6 +56,7 @@ from gramps.gen.utils.file import media_path_full
 from gramps.gen.utils.place import conv_lat_lon
 from gramps.gen.constfunc import cuni
 from gramps.gen.utils.location import get_main_location
+from gramps.gen.display.place import displayer as place_displayer
 
 #-------------------------------------------------------------------------
 #
@@ -1310,7 +1311,8 @@ class GedcomWriter(UpdateCallback):
             note_list = [ n.handle for n in note_list 
                           if n and n.get_type() != NoteType.SOURCE_TEXT]
             self._note_references(note_list, level+1)
-            self._photos(citation.get_media_list(), level+1)
+            
+        self._photos(citation.get_media_list(), level+1)
         
         even = None
         for srcattr in citation.get_attribute_list():
@@ -1363,7 +1365,7 @@ class GedcomWriter(UpdateCallback):
             +1 <<NOTE_STRUCTURE>> {0:M} 
         """
         if place is None: return
-        place_name = place.get_title()
+        place_name = place_displayer.display(self.dbase, place)
         self._writeln(level, "PLAC", place_name.replace('\r', ' '), limit=120)
         longitude = place.get_longitude()
         latitude = place.get_latitude()

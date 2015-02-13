@@ -56,6 +56,7 @@ from ..widgets import (MonitoredEntry, PrivacyButton, MonitoredTagList,
                        MonitoredDataType)
 from gramps.gen.errors import ValidationError
 from gramps.gen.utils.place import conv_lat_lon
+from gramps.gen.display.place import displayer as place_displayer
 from ..dialog import ErrorDialog
 from ..glade import Glade
 
@@ -85,7 +86,7 @@ class EditPlace(EditPrimary):
 
     def get_menu_title(self):
         if self.obj and self.obj.get_handle():
-            title = self.obj.get_title()
+            title = place_displayer.display(self.db, self.obj)
             dialog_title = _('Place: %s')  % title
         else:
             dialog_title = _('New Place')
@@ -112,8 +113,7 @@ class EditPlace(EditPrimary):
         
         self.name = MonitoredEntry(self.top.get_object("name_entry"),
                                     self.obj.set_name, self.obj.get_name,
-                                    self.db.readonly,
-                                    changed=self.name_changed)
+                                    self.db.readonly)
         
         self.gid = MonitoredEntry(self.top.get_object("gid"),
                                   self.obj.set_gramps_id, 
@@ -167,14 +167,6 @@ class EditPlace(EditPrimary):
             return ValidationError(_("Invalid longitude (syntax: 18\u00b09'") +
                                    _('48.21"E, -18.2412 or -18:9:48.21)'))
 
-    def update_title(self):
-        new_name = ', '.join(get_location_list(self.db, self.obj))
-        self.top.get_object("place_title").set_text(new_name)
-        self.obj.set_title(new_name)
-
-    def name_changed(self, obj):
-        self.update_title()
-
     def build_menu_names(self, place):
         return (_('Edit Place'), self.get_menu_title())
 
@@ -190,8 +182,7 @@ class EditPlace(EditPrimary):
                                                self.uistate,
                                                self.track,
                                                self.obj.get_placeref_list(),
-                                               self.obj.handle,
-                                               self.update_title)
+                                               self.obj.handle)
         self._add_tab(notebook, self.placeref_list)
         self.track_ref_for_deletion("placeref_list")
         
@@ -260,13 +251,6 @@ class EditPlace(EditPrimary):
             self.ok_button.set_sensitive(True)
             return
 
-        if self.obj.get_title().strip() == '':
-            msg1 = _("Cannot save location. Title not entered.")
-            msg2 = _("You must enter a title before saving.") 
-            ErrorDialog(msg1, msg2)
-            self.ok_button.set_sensitive(True)
-            return
-
         if self.obj.get_name().strip() == '':
             msg1 = _("Cannot save location. Name not entered.")
             msg2 = _("You must enter a name before saving.") 
@@ -277,7 +261,7 @@ class EditPlace(EditPrimary):
         (uses_dupe_id, id) = self._uses_duplicate_id()
         if uses_dupe_id:
             prim_object = self.get_from_gramps_id(id)
-            name = prim_object.get_title()
+            name = place_displayer.display(self.db, prim_object)
             msg1 = _("Cannot save place. ID already exists.")
             msg2 = _("You have attempted to use the existing Gramps ID with "
                          "value %(id)s. This value is already used by '" 
@@ -289,14 +273,15 @@ class EditPlace(EditPrimary):
             return
 
         with DbTxn('', self.db) as trans:
+            place_title = place_displayer.display(self.db, self.obj)
             if not self.obj.get_handle():
                 self.db.add_place(self.obj, trans)
-                msg = _("Add Place (%s)") % self.obj.get_title()
+                msg = _("Add Place (%s)") % place_title
             else:
                 if not self.obj.get_gramps_id():
                     self.obj.set_gramps_id(self.db.find_next_place_gramps_id())
                 self.db.commit_place(self.obj, trans)
-                msg = _("Edit Place (%s)") % self.obj.get_title()
+                msg = _("Edit Place (%s)") % place_title
             trans.set_description(msg)
         
         self.close()
@@ -320,8 +305,8 @@ class DeletePlaceQuery(object):
         self.event_list  = event_list
         
     def query_response(self):
-        with DbTxn(_("Delete Place (%s)") % self.obj.get_title(),
-                   self.db) as trans:
+        place_title = place_displayer.display(self.db, self.obj)
+        with DbTxn(_("Delete Place (%s)") % place_title, self.db) as trans:
             self.db.disable_signals()
         
             place_handle = self.obj.get_handle()

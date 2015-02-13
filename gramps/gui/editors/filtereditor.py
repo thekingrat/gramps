@@ -63,11 +63,12 @@ from gramps.gen.const import RULE_GLADE, URL_MANUAL_PAGE
 from ..display import display_help
 from gramps.gen.errors import WindowActiveError
 from gramps.gen.lib import (AttributeType, EventType, FamilyRelType,
-                            NameOriginType, NameType, NoteType)
+                            NameOriginType, NameType, NoteType, PlaceType)
 from gramps.gen.filters import rules
 from ..autocomp import StandardCustomSelector, fill_entry
 from ..selectors import SelectorFactory
 from gramps.gen.display.name import displayer as _nd
+from gramps.gen.display.place import displayer as _pd
 from gramps.gen.utils.db import family_name
 from gramps.gen.utils.string import conf_strings
 from gramps.gen.constfunc import cuni
@@ -106,6 +107,7 @@ _name2typeclass = {
     _('Note type:')          : NoteType,
     _('Name type:')          : NameType,
     _('Surname origin type:'): NameOriginType,
+    _('Place type:')         : PlaceType,
 }
 
 #-------------------------------------------------------------------------
@@ -345,7 +347,7 @@ class MyID(Gtk.Box):
             name = str(event.get_type)
         elif self.namespace == 'Place':
             place = self.db.get_place_from_gramps_id(gramps_id)
-            name = place.get_title()
+            name = _pd.display(self.db, place)
         elif self.namespace == 'Source':
             source = self.db.get_source_from_gramps_id(gramps_id)
             name = source.get_title()
@@ -559,6 +561,8 @@ class EditRule(ManagedWindow):
                         additional = self.db.get_name_types()
                     elif v == _('Surname origin type:'):
                         additional = self.db.get_origin_types()
+                    elif v == _('Place type:'):
+                        additional = self.db.get_place_types()
                     t = MySelect(_name2typeclass[v], additional)
                 elif v == _('Inclusive:'):
                     t = MyBoolean(_('Include original person'))
@@ -992,7 +996,7 @@ class ShowResults(ManagedWindow):
             gid = citation.get_gramps_id()
         elif self.namespace == 'Place':
             place = self.db.get_place_from_handle(handle)
-            name = place.get_title()
+            name = _pd.display(self.db, place)
             gid = place.get_gramps_id()
         elif self.namespace == 'Media':
             obj = self.db.get_object_from_handle(handle)
@@ -1024,7 +1028,8 @@ class ShowResults(ManagedWindow):
         elif self.namespace == 'Citation':
             sortname = self.db.get_citation_from_handle(handle).get_page()
         elif self.namespace == 'Place':
-            sortname = self.db.get_place_from_handle(handle).get_title()
+            place = self.db.get_place_from_handle(handle)
+            sortname = _pd.display(self.db, place)
         elif self.namespace == 'Media':
             sortname = self.db.get_object_from_handle(handle).get_description()
         elif self.namespace == 'Repository':

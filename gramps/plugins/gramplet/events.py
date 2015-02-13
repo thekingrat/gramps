@@ -25,6 +25,7 @@ from gramps.gui.dbguielement import DbGUIElement
 from gramps.gen.const import GRAMPS_LOCALE as glocale
 _ = glocale.translation.gettext
 from gramps.gen.display.name import displayer as name_displayer
+from gramps.gen.display.place import displayer as place_displayer
 from gramps.gen.datehandler import get_date
 from gramps.gen.utils.db import (get_participant_from_event,
                                  get_birth_or_fallback,
@@ -72,13 +73,13 @@ class Events(Gramplet, DbGUIElement):
         top = Gtk.TreeView()
         titles = [('', NOSORT, 50,),
                   (_('Type'), 1, 100),
-                  (_('Main Participants'), 2, 200),
+                  (_('Description'), 2, 150),
                   (_('Date'), 3, 100),
                   ('', NOSORT, 50),
                   (_('Age'), 4, 100),
                   ('', NOSORT, 50),
                   (_('Place'), 5, 400),
-                  (_('Description'), 6, 150),
+                  (_('Main Participants'), 6, 200),
                   (_('Role'), 7, 100)]
         self.model = ListModel(top, titles, event_func=self.edit_event)
         return top
@@ -93,30 +94,20 @@ class Events(Gramplet, DbGUIElement):
         event_sort = '%012d' % event.get_date_object().get_sort_value()
         person_age      = self.column_age(event)
         person_age_sort = self.column_sort_age(event)
-        place = ''
-        handle = event.get_place_handle()
-        if handle:
-            place = self.dbstate.db.get_place_from_handle(handle).get_title()
+        place = place_displayer.display_event(self.dbstate.db, event)
 
-        participants = ''
-        if int(event_ref.get_role()) == EventRoleType.FAMILY:
-            if spouse:
-                participants = name_displayer.display(spouse)
-
-        if int(event_ref.get_role()) not in (EventRoleType.PRIMARY,
-                                             EventRoleType.FAMILY):
-            participants = get_participant_from_event(self.dbstate.db,
-                                                      event_ref.ref)
+        participants = get_participant_from_event(self.dbstate.db,
+                                                  event_ref.ref)
 
         self.model.add((event.get_handle(),
                         str(event.get_type()),
-                        participants,
+                        event.get_description(),
                         event_date,
                         event_sort,
                         person_age,
                         person_age_sort,
                         place,
-                        event.get_description(),
+                        participants,
                         str(event_ref.get_role())))
 
     def column_age(self, event):

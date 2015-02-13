@@ -1,7 +1,8 @@
 #
 # Gramps - a GTK+/GNOME based genealogy program
 #
-# Copyright (C) 2000-2006  Donald N. Allingham
+# Copyright (C) 2002-2006  Donald N. Allingham
+# Copyright (C) 2015       Nick Hall
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,45 +21,37 @@
 
 #-------------------------------------------------------------------------
 #
-# python libraries
+# Standard Python modules
 #
 #-------------------------------------------------------------------------
+from ....const import GRAMPS_LOCALE as glocale
+_ = glocale.translation.sgettext
 
 #-------------------------------------------------------------------------
 #
-# GTK libraries
+# Gramps modules
 #
 #-------------------------------------------------------------------------
-from gi.repository import Gtk
+from .. import Rule
+from ....display.place import displayer
 
 #-------------------------------------------------------------------------
 #
-# GRAMPS classes
+# HasTitle
 #
 #-------------------------------------------------------------------------
-from gramps.gen.datehandler import get_date
-from gramps.gen.display.place import displayer as place_displayer
-from gramps.gen.utils.lds import TEMPLES
+class HasTitle(Rule):
+    """
+    Rule that checks for a place with a title
+    """
 
-#-------------------------------------------------------------------------
-#
-# LdsModel
-#
-#-------------------------------------------------------------------------
-class LdsModel(Gtk.ListStore):
+    labels      = [_('Title:')]
+    name        = _('Places matching a title')
+    description = _('Matches places with a particular title')
+    category    = _('General filters')
+    allow_regex = True
 
-    _HANDLE_COL = 5
-
-    def __init__(self, lds_list, db):
-        Gtk.ListStore.__init__(self, str, str, str, str, str, bool, object)
-
-        for lds_ord in lds_list:
-            self.append(row=[
-                lds_ord.type2str(), 
-                get_date(lds_ord), 
-                lds_ord.status2str(), 
-                TEMPLES.name(lds_ord.get_temple()),
-                place_displayer.display_event(db, lds_ord),
-                lds_ord.get_privacy(),
-                lds_ord, 
-                ])
+    def apply(self, db, place):
+        if not self.match_substring(0, displayer.display(db, place)):
+            return False
+        return True

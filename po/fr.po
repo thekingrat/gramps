@@ -68,8 +68,8 @@ msgid "Manage genealogical information, perform genealogical research and analys
 msgstr "Gestion des informations généalogiques, optimisation de la recherche et de l'analyse"
 
 #: ../data/gramps.desktop.in.h:5
-msgid "Genealogy;Family History;Research;Family Tree;GEDCOM"
-msgstr "Généalogie;Histoire familiale,Recherche,Arbre familial;Gedcom"
+msgid "Genealogy;Family History;Research;Family Tree;GEDCOM;"
+msgstr "Généalogie;Histoire familiale,Recherche,Arbre familial;Gedcom;"
 
 #: ../data/gramps.keys.in.h:1
 #: ../data/gramps.xml.in.h:1
@@ -7047,7 +7047,7 @@ msgstr "Horizontal (→)"
 #: ../gramps/gen/plug/docgen/graphdoc.py:76
 #: ../gramps/plugins/view/pedigreeview.py:2024
 msgid "Horizontal (←)"
-msgstr "Horizontal (→)"
+msgstr "Horizontal (←)"
 
 #: ../gramps/gen/plug/docgen/graphdoc.py:78
 msgid "Bottom, left"

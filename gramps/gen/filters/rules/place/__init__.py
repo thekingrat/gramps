@@ -37,12 +37,14 @@ from ._hassourceof import HasSourceOf
 from ._placeprivate import PlacePrivate
 from ._matchesfilter import MatchesFilter
 from ._hasplace import HasPlace
+from ._hasdata import HasData
 from ._hasnolatorlon import HasNoLatOrLon
 from ._inlatlonneighborhood import InLatLonNeighborhood
 from ._matcheseventfilter import MatchesEventFilter
 from ._matchessourceconfidence import MatchesSourceConfidence
 from ._changedsince import ChangedSince
 from ._hastag import HasTag
+from ._hastitle import HasTitle
 
 editor_rule_list = [
     AllPlaces,
@@ -58,10 +60,11 @@ editor_rule_list = [
     PlacePrivate,
     MatchesFilter,
     MatchesSourceConfidence,
-    HasPlace,
+    HasData,
     HasNoLatOrLon,
     InLatLonNeighborhood,
     MatchesEventFilter,
     ChangedSince,
-    HasTag
+    HasTag,
+    HasTitle
 ]

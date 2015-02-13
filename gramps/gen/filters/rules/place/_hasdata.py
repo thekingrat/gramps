@@ -2,8 +2,7 @@
 # Gramps - a GTK+/GNOME based genealogy program
 #
 # Copyright (C) 2002-2006  Donald N. Allingham
-# Copyright (C) 2008       Gary Burton
-# Copyright (C) 2010       Nick Hall
+# Copyright (C) 2015       Nick Hall
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -35,71 +34,50 @@ _ = glocale.translation.sgettext
 #-------------------------------------------------------------------------
 from .. import Rule
 from ....lib import PlaceType
-from ....utils.location import get_locations
 
 #-------------------------------------------------------------------------
 #
-# HasPlace
+# HasData
 #
 #-------------------------------------------------------------------------
-class HasPlace(Rule):
-    """Rule that checks for a place with a particular value"""
+class HasData(Rule):
+    """
+    Rule that checks for a place with a particular value
+    """
 
-    labels      = [ _('Title:'),
-                    _('Street:'), 
-                    _('Locality:'), 
-                    _('City:'), 
-                    _('County:'), 
-                    _('State:'), 
-                    _('Country:'), 
-                    _('ZIP/Postal Code:'),
-                    _('Church Parish:'), 
+    labels      = [ _('Name:'),
+                    _('Place type:'),
+                    _('Code:'),
                     ]
     name        = _('Places matching parameters')
-    description = _("Matches places with particular parameters")
+    description = _('Matches places with particular parameters')
     category    = _('General filters')
     allow_regex = True
 
-    TYPE2FIELD = {PlaceType.STREET: 1,
-                  PlaceType.LOCALITY: 2,
-                  PlaceType.CITY: 3,
-                  PlaceType.COUNTY: 4,
-                  PlaceType.STATE: 5,
-                  PlaceType.COUNTRY: 6,
-                  PlaceType.PARISH: 8}
+    def prepare(self, dbase):
+        self.place_type = self.list[1]
+
+        if self.place_type:
+            self.place_type = PlaceType()
+            self.place_type.set_from_xml_str(self.list[1])
 
     def apply(self, db, place):
-        if not self.match_substring(0, place.get_title()):
+        if not self.match_name(place):
             return False
 
-        if not self.match_substring(7, place.get_code()):
+        if self.place_type and place.get_type() != self.place_type:
             return False
 
-        # If no location data was given then we're done: match
-        if not any(self.list[1:7] + [self.list[8]]):
-            return True
-            
-        for location in get_locations(db, place):
-            if self.check(location):
-                return True
+        if not self.match_substring(2, place.get_code()):
+            return False
 
-        return False
-
-    def check(self, location):
-        """
-        Check each location for a match.
-        """
-        for place_type, field in self.TYPE2FIELD.items():
-            name_list = location.get(place_type, [''])
-            if not self.match_name(field, name_list):
-                return False
         return True
 
-    def match_name(self, field, name_list):
+    def match_name(self, place):
         """
         Match any name in a list of names.
         """
-        for name in name_list:
-            if self.match_substring(field, name):
+        for name in place.get_all_names():
+            if self.match_substring(0, name):
                 return True
         return False
