@@ -29,6 +29,7 @@ Package providing filtering framework for GRAMPS.
 # Gramps imports
 #
 #------------------------------------------------------------------------
+from ..const import GRAMPS_LOCALE as glocale
 from ..lib.person import Person
 from ..lib.family import Family
 from ..lib.src import Source
@@ -380,3 +381,28 @@ def GenericFilterFactory(namespace):
         return GenericRepoFilter
     elif namespace == 'Note':
         return GenericNoteFilter
+
+
+class DeferredFilter(GenericFilter):
+    """
+    Filter class allowing for deferred translation of the filter name
+    """
+
+    def __init__(self, filter_name, person_name):
+        GenericFilter.__init__(self, None)
+        self.name_pair = [filter_name, person_name]
+
+    def get_name(self, ulocale=glocale):
+        """
+        return the filter name, possibly translated
+
+        If ulocale is passed in (a :class:`.GrampsLocale`) then
+        the translated value will be returned instead.
+
+        :param ulocale: allow deferred translation of strings
+        :type ulocale: a :class:`.GrampsLocale` instance
+        """
+        self._ = ulocale.translation.gettext
+        if self.name_pair[1]:
+            return self._(self.name_pair[0]) % self.name_pair[1]
+        return self._(self.name_pair[0])

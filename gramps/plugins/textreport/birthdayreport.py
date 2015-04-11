@@ -58,9 +58,9 @@ import gramps.plugins.lib.libholiday as libholiday
 # localization for BirthdayOptions only!!
 from gramps.gen.datehandler import displayer as _dd
 
+# _T_ is a gramps-defined keyword -- see po/update_po.py and po/genpot.sh
 def _T_(value): # enable deferred translations (see Python docs 22.1.3.4)
     return value
-# _T_ is a gramps-defined keyword -- see po/update_po.py and po/genpot.sh
 
 _TITLE0 = _T_("Birthday and Anniversary Report")
 _TITLE1 = _T_("My Birthday Report")
@@ -260,9 +260,9 @@ class BirthdayReport(Report):
             people = self.filter.apply(self.database, people, 
                                        step)
         
+        ngettext = self._locale.translation.ngettext # to see "nearby" comments
         rel_calc = get_relationship_calculator(reinit=True,
                                                clocale=self._locale)
-        ngettext = self._locale.translation.ngettext # to see "nearby" comments
 
         with self._user.progress(_('Birthday and Anniversary Report'), 
                 _('Reading database...'), len(people)) as step:
@@ -423,10 +423,13 @@ class BirthdayOptions(MenuReportOptions):
         self.__pid.set_help(_("The center person for the report"))
         menu.add_option(category_name, "pid", self.__pid)
         self.__pid.connect('value-changed', self.__update_filters)
-        
+
+        self._nf = stdoptions.add_name_format_option(menu, category_name)
+        self._nf.connect('value-changed', self.__update_filters)
+
         self.__update_filters()
 
-        stdoptions.add_name_format_option(menu, category_name)
+        stdoptions.add_private_data_option(menu, category_name)
 
         country = EnumeratedListOption(_("Country for holidays"), 0)
         holiday_table = libholiday.HolidayTable()
@@ -456,8 +459,6 @@ class BirthdayOptions(MenuReportOptions):
         maiden_name.add_item("own", _("Wives use their own surname"))
         maiden_name.set_help(_("Select married women's displayed surname"))
         menu.add_option(category_name, "maiden_name", maiden_name)
-
-        stdoptions.add_private_data_option(menu, category_name)
 
         alive = BooleanOption(_("Include only living people"), True)
         alive.set_help(_("Include only living people in the report"))
@@ -502,7 +503,10 @@ class BirthdayOptions(MenuReportOptions):
         """
         gid = self.__pid.get_value()
         person = self.__db.get_person_from_gramps_id(gid)
-        filter_list = ReportUtils.get_person_filters(person, False)
+        nfv = self._nf.get_value()
+        filter_list = ReportUtils.get_person_filters(person,
+                                                     include_single=False,
+                                                     name_format=nfv)
         self.__filter.set_filters(filter_list)
 
     def make_my_style(self, default_style, name, description, 

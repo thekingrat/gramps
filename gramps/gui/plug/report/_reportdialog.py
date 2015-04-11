@@ -445,7 +445,7 @@ class ReportDialog(ManagedWindow):
         hid = self.style_name
         if hid[-4:] == ".xml":
             hid = hid[0:-4]
-        self.target_fileentry = FileEntry(hid, _("Save As"))
+        self.target_fileentry = FileEntry(hid, _("Save As"), parent=self.window)
         spath = self.get_default_directory()
         self.target_fileentry.set_filename(spath)
         # need any labels at top:
@@ -499,8 +499,8 @@ class ReportDialog(ManagedWindow):
                                 _("You do not have permission to write "
                                   "under the directory %s\n\n"
                                   "Please select another directory or correct "
-                                  "the permissions.") % self.target_path 
-                                )
+                                  "the permissions.") % self.target_path,
+                                parent=self.window)
                     return None
 
             # selected path is an existing file and we need a file
@@ -509,7 +509,8 @@ class ReportDialog(ManagedWindow):
                                  _('You can choose to either overwrite the '
                                    'file, or change the selected filename.'),
                                  _('_Overwrite'), None,
-                                 _('_Change filename'), None)
+                                 _('_Change filename'), None,
+                                 parent=self.window)
                              
                 if a.get_response() == Gtk.ResponseType.YES:
                     return None
@@ -519,13 +520,21 @@ class ReportDialog(ManagedWindow):
             # we will need to create the file/dir
             # need to make sure we can create in the parent dir
             parent_dir = os.path.dirname(os.path.normpath(self.target_path))
-            if not os.access(parent_dir, os.W_OK):
-                ErrorDialog(_('Permission problem'),
-                            _("You do not have permission to create "
-                              "%s\n\n"
-                              "Please select another path or correct "
-                              "the permissions.") % self.target_path 
-                            )
+            if os.path.isdir(parent_dir):
+                if not os.access(parent_dir, os.W_OK):
+                    ErrorDialog(_('Permission problem'),
+                                _("You do not have permission to create "
+                                  "%s\n\n"
+                                  "Please select another path or correct "
+                                  "the permissions.") % self.target_path,
+                                parent=self.window)
+                    return None
+            else:
+                ErrorDialog(_('No directory'),
+                            _('There is no directory %s.\n\n'
+                              'Please select another directory '
+                              'or create it.') % parent_dir,
+                            parent=self.window)
                 return None
         
         self.set_default_directory(os.path.dirname(self.target_path) + os.sep)
@@ -651,7 +660,8 @@ def report(dbstate, uistate, person, report_class, options_class,
         ErrorDialog(
             _('Active person has not been set'),
             _('You must select an active person for this report to work '
-              'properly.'))
+              'properly.'),
+            parent=uistate.window)
         return
 
     if category == CATEGORY_TEXT:
@@ -699,14 +709,16 @@ def report(dbstate, uistate, person, report_class, options_class,
                 
             except FilterError as msg:
                 (m1, m2) = msg.messages()
-                ErrorDialog(m1, m2)
+                ErrorDialog(m1, m2, parent=uistate.window)
             except IOError as msg:
-                ErrorDialog(_("Report could not be created"), str(msg))
+                ErrorDialog(_("Report could not be created"), str(msg),
+                            parent=uistate.window)
             except ReportError as msg:
                 (m1, m2) = msg.messages()
-                ErrorDialog(m1, m2)
+                ErrorDialog(m1, m2, parent=uistate.window)
             except DatabaseError as msg:                
-                ErrorDialog(_("Report could not be created"), str(msg))
+                ErrorDialog(_("Report could not be created"), str(msg),
+                            parent=uistate.window)
 #           The following except statement will catch all "NoneType" exceptions.
 #           This is useful for released code where the exception is most likely
 #           a corrupt database. But it is less useful for developing new reports
