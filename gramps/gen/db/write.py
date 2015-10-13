@@ -2471,14 +2471,14 @@ class DbBsddb(DbBsddbRead, DbWriteBase, UpdateCallback):
         with open(versionpath, "w") as version_file:
             version_file.write(version)
 
-        versionpath = os.path.join(name, cuni(PCKVERSFN))
-        _LOG.debug("Write pickle version file to %s" % "Yes")
-        with open(versionpath, "w") as version_file:
-            version = "Yes"
-            if sys.version_info[0] <3:
-                if isinstance(version, UNITYPE):
-                    version = version.encode('utf-8')
-            version_file.write(version)
+        # The pickle upgrade file is not written for Python2; its contents is
+        # never actually examined, all that matters is whether it is present
+        if sys.version_info[0] >= 3:
+            versionpath = os.path.join(name, cuni(PCKVERSFN))
+            _LOG.debug("Write pickle version file to %s" % "Yes")
+            with open(versionpath, "w") as version_file:
+                version = "Yes"
+                version_file.write(version)
 
         versionpath = os.path.join(name, cuni(SCHVERSFN))
         _LOG.debug("Write schema version file to %s" % str(_DBVERSION))

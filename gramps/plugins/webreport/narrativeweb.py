@@ -517,8 +517,8 @@ def format_date(date):
         cal = date.get_calendar()
         mod = date.get_modifier()
         quality = date.get_quality()
-        if quality in libgedcom.DATE_QUALITY:
-            qual_text = libgedcom.DATE_QUALITY[quality] + " "
+        if quality in DATE_QUALITY:
+            qual_text = DATE_QUALITY[quality] + " "
         else:
             qual_text = ""
         if mod == Date.MOD_SPAN:
@@ -5052,14 +5052,14 @@ class DownloadPage(BasePage):
                         else:
                             tcell += "&nbsp;"
 
-        # clear line for proper styling
-        # create footer section
-        footer = self.write_footer()
-        body += (fullclear, footer)
+            # clear line for proper styling
+            # create footer section
+            footer = self.write_footer()
+            body += (fullclear, footer)
 
-        # send page out for processing
-        # and close the file
-        self.XHTMLWriter(downloadpage, of, sio)
+            # send page out for processing
+            # and close the file
+            self.XHTMLWriter(downloadpage, of, sio)
 
 class ContactPage(BasePage):
     def __init__(self, report, title):
